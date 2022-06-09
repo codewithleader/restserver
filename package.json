@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "REST-Server with Node JS",
   "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "author": "Elis Antonio Perez <elisperezmusic@gmail.com> (https://www.instagram.com/elisperezmusic)",
   "license": "MIT",
   "dependencies": {
