@@ -4,3 +4,5 @@
 Follow me: [Instagram](https://www.instagram.com/elisperezmusic)
 
 ### Server code skeleton.
+
+#### Add public folder.
