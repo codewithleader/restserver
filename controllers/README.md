@@ -29,3 +29,10 @@
 - CRUD: Delete
 - Status: 405 (Method Not Allowed), unless you want to delete the whole collection—not often desirable.
 - Errors: 200 (OK). 404 (Not Found), if ID not found or invalid.
+
+
+## Query params:
+- Url with query params (Example: http://localhost:8080/api/users?q=something&name=Elis+Antonio&password=123456&id=1)
+- const { q, name, password, id } = req.query;
+OR...
+- const { ...queries } = req.query;

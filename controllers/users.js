@@ -1,8 +1,8 @@
-const { response } = require('express');
+const { response, request } = require('express');
 
 // ? ::CRUD:: Create, Read, Update, Delete.
 // Create
-const usersPOST = (req, res = response) => {
+const usersPOST = (req = request, res = response) => {
   const { ...data } = req.body;
   res.json({
     msg: 'post API - Controller',
@@ -11,28 +11,34 @@ const usersPOST = (req, res = response) => {
 };
 
 // Read
-const usersGET = (req, res = response) => {
+const usersGET = (req = request, res = response) => {
+  const {...queries} = req.query;
+
   res.json({
     msg: 'get API - Controller',
+    queries,
   });
 };
 
 // Update/Replace
-const usersPUT = (req, res = response) => {
+const usersPUT = (req = request, res = response) => {
+  const { id } = req.params;
+
   res.json({
     msg: 'put API - Controller',
+    id,
   });
 };
 
 // Update/Modify
-const usersPATCH = (req, res = response) => {
+const usersPATCH = (req = request, res = response) => {
   res.json({
     msg: 'patch API - Controller',
   });
 };
 
 // Delete
-const usersDELETE = (req, res = response) => {
+const usersDELETE = (req = request, res = response) => {
   res.json({
     msg: 'delete API - Controller',
   });
