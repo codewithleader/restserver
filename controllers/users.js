@@ -7,8 +7,10 @@ const usersGET = (req, res = response) => {
 };
 
 const usersPOST = (req, res = response) => {
+  const { ...data } = req.body;
   res.json({
     msg: 'post API - Controller',
+    data,
   });
 };
 

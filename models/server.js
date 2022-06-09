@@ -17,6 +17,9 @@ class Server {
     // CORS
     this.app.use(cors());
 
+    // Body Parser
+    this.app.use(express.json());
+
     // Telling the server to use the public folder as the root folder.
     this.app.use(express.static('public'));
   }
