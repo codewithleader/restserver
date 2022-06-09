@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config(); // !: Not used yet.
 
 class Server {
@@ -11,30 +12,38 @@ class Server {
   }
 
   // methods
+  middlewares() {
+    // CORS
+    this.app.use(cors());
+
+    // Telling the server to use the public folder as the root folder.
+    this.app.use(express.static('public'));
+  }
+
   routes() {
     this.app.get('/api', (req, res) => {
       res.json({
-        msg: 'get API'
+        msg: 'get API',
       });
     });
     this.app.put('/api', (req, res) => {
       res.json({
-        msg: 'put API'
+        msg: 'put API',
       });
     });
     this.app.post('/api', (req, res) => {
       res.json({
-        msg: 'post API'
+        msg: 'post API',
       });
     });
     this.app.delete('/api', (req, res) => {
       res.json({
-        msg: 'delete API'
+        msg: 'delete API',
       });
     });
     this.app.patch('/api', (req, res) => {
       res.json({
-        msg: 'patch API'
+        msg: 'patch API',
       });
     });
   }
@@ -43,11 +52,6 @@ class Server {
     this.app.listen(this.port, () => {
       console.log(`Server running on port ${this.port}`);
     });
-  }
-
-  middlewares() {
-    /* Telling the server to use the public folder as the root folder. */
-    this.app.use(express.static('public'));
   }
 }
 
