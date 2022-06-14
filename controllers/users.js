@@ -1,18 +1,22 @@
 const { response, request } = require('express');
 
+const User = require('../models/user');
+
 // ? ::CRUD:: Create, Read, Update, Delete.
 // Create
-const usersPOST = (req = request, res = response) => {
-  const { ...data } = req.body;
+const usersPOST = async (req = request, res = response) => {
+  const body = req.body;
+  const user = new User(body);
+
+  await user.save();
   res.json({
-    msg: 'post API - Controller',
-    data,
+    user,
   });
 };
 
 // Read
 const usersGET = (req = request, res = response) => {
-  const {...queries} = req.query;
+  const { ...queries } = req.query;
 
   res.json({
     msg: 'get API - Controller',
