@@ -37,3 +37,9 @@ await mongoose.connect('mongodb://localhost:27017/test', {
 });
 ```
 [More](https://mongoosejs.com/docs/migrating_to_6.html#no-more-deprecation-warning-options)
+
+### Express-validator
+- Created validateHelper and /validator/user.js
+  [More...](https://youtu.be/VMRgFfmv6j0)
+- [Official documentation](https://express-validator.github.io/docs/custom-error-messages.html)
+- [All validators](https://github.com/validatorjs/validator.js#validators)
