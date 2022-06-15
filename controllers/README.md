@@ -1,4 +1,5 @@
 # HTTP Verb
+[HTTP Status code](https://developer.mozilla.org/es/docs/Web/HTTP/Status)
 
 ## POST:
 
