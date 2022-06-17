@@ -4,7 +4,7 @@ const bcryptjs = require('bcryptjs');
 const User = require('../models/user');
 
 // ? ::CRUD:: Create, Read, Update, Delete.
-// Create
+// POST: Create
 const usersPOST = async (req = request, res = response) => {
   const { name, email, password, role } = req.body;
   const user = new User({ name, email, password, role });
@@ -21,7 +21,7 @@ const usersPOST = async (req = request, res = response) => {
   });
 };
 
-// Read
+// GET: Read
 const usersGET = (req = request, res = response) => {
   const { ...queries } = req.query;
 
@@ -31,24 +31,31 @@ const usersGET = (req = request, res = response) => {
   });
 };
 
-// Update/Replace
-const usersPUT = (req = request, res = response) => {
+// PUT: Update/Replace
+const usersPUT = async (req = request, res = response) => {
   const { id } = req.params;
+  const { _id, password, google, email, ...rest } = req.body;
 
-  res.json({
-    msg: 'put API - Controller',
-    id,
-  });
+  // validate with database
+  if (password) {
+    // Encrypt password
+    const salt = bcryptjs.genSaltSync(); // default 10
+    rest.password = bcryptjs.hashSync(password, salt);
+  }
+
+  const userUp = await User.findByIdAndUpdate(id, rest, {new: true});
+
+  res.json(userUp);
 };
 
-// Update/Modify
+// PATCH: Update/Modify
 const usersPATCH = (req = request, res = response) => {
   res.json({
     msg: 'patch API - Controller',
   });
 };
 
-// Delete
+// ! DEL: Delete
 const usersDELETE = (req = request, res = response) => {
   res.json({
     msg: 'delete API - Controller',

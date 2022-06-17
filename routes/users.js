@@ -1,20 +1,18 @@
 const { Router } = require('express');
-const { body } = require('express-validator');
 
 const { usersGET, usersPOST, usersPUT, usersDELETE, usersPATCH } = require('../controllers/users');
-const { validateCreate } = require('../middlewares/validators/users');
+const {
+  validatePost,
+  validatePut,
+} = require('../middlewares/validators/middlewaresForValidations');
 
 const router = Router();
 
-router.post(
-  '/',
-  validateCreate,
-  usersPOST
-);
+router.post('/', validatePost, usersPOST);
 
 router.get('/', usersGET);
 
-router.put('/:id', usersPUT);
+router.put('/:id', validatePut, usersPUT);
 
 router.patch('/', usersPATCH);
 
