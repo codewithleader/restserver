@@ -17,6 +17,7 @@ const validatePost = [
 const validatePut = [
   check('id', 'Not is valid id Elis').isMongoId(),
   check('id').custom(isUserByIdExist),
+  check('role').custom(isValidRole),
   validateResult,
 ];
 
