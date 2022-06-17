@@ -22,12 +22,21 @@ const usersPOST = async (req = request, res = response) => {
 };
 
 // GET: Read
-const usersGET = (req = request, res = response) => {
-  const { ...queries } = req.query;
+const usersGET = async (req = request, res = response) => {
+  // Pagination of users
+  const { limit = 5, start = 0 } = req.query;
+  const query = { state: true };
+
+  const [ total, users ] = await Promise.all([
+    User.countDocuments(query),
+    User.find(query).skip(Number(start)).limit(Number(limit)),
+  ]);
 
   res.json({
-    msg: 'get API - Controller',
-    queries,
+    /* Return the total number of users. Number */
+    total,
+    /* Return a collection of users. Array */
+    users,
   });
 };
 
@@ -43,7 +52,7 @@ const usersPUT = async (req = request, res = response) => {
     rest.password = bcryptjs.hashSync(password, salt);
   }
 
-  const userUp = await User.findByIdAndUpdate(id, rest, {new: true});
+  const userUp = await User.findByIdAndUpdate(id, rest, { new: true });
 
   res.json(userUp);
 };
