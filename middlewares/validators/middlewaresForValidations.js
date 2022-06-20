@@ -27,4 +27,11 @@ const validateDel = [
   validateResult,
 ];
 
-module.exports = { validatePost, validatePut, validateDel };
+// FOR AUTHENTICATION MIDDLEWARE.
+const validatePostAuth = [
+  check('email', 'Email not found').exists().isEmail(),
+  check('password', 'Password is required').exists().not().isEmpty(),
+  validateResult,
+]
+
+module.exports = { validatePost, validatePut, validateDel, validatePostAuth };
