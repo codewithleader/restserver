@@ -26,8 +26,19 @@ const usersGET = async (req = request, res = response) => {
   // Pagination of users
   const { limit = 5, start = 0 } = req.query;
   const query = { state: true };
+  // const limitNum = limit => {
+  //   if (
+  //     Number(limit) === NaN ||
+  //     Number(limit) === undefined ||
+  //     Number(limit) === null ||
+  //     Number(limit) < 1
+  //   ) {
+  //     return 2;
+  //   }
+  //   return Number(limit);
+  // };
 
-  const [ total, users ] = await Promise.all([
+  const [total, users] = await Promise.all([
     User.countDocuments(query),
     User.find(query).skip(Number(start)).limit(Number(limit)),
   ]);
@@ -65,10 +76,11 @@ const usersPATCH = (req = request, res = response) => {
 };
 
 // ! DEL: Delete
-const usersDELETE = (req = request, res = response) => {
-  res.json({
-    msg: 'delete API - Controller',
-  });
+const usersDELETE = async (req = request, res = response) => {
+  const { id } = req.params;
+  // const user = await User.findByIdAndDelete(id);
+  const user = await User.findByIdAndUpdate(id, { state: false }, { new: true });
+  res.json(user);
 };
 
 module.exports = {

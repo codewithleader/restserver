@@ -21,4 +21,10 @@ const validatePut = [
   validateResult,
 ];
 
-module.exports = { validatePost, validatePut };
+const validateDel = [
+  check('id', 'Not is valid id Elis').isMongoId(),
+  check('id').custom(isUserByIdExist),
+  validateResult,
+];
+
+module.exports = { validatePost, validatePut, validateDel };

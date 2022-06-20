@@ -4,6 +4,7 @@ const { usersGET, usersPOST, usersPUT, usersDELETE, usersPATCH } = require('../c
 const {
   validatePost,
   validatePut,
+  validateDel,
 } = require('../middlewares/validators/middlewaresForValidations');
 
 const router = Router();
@@ -16,6 +17,6 @@ router.put('/:id', validatePut, usersPUT);
 
 router.patch('/', usersPATCH);
 
-router.delete('/', usersDELETE);
+router.delete('/:id', validateDel, usersDELETE);
 
 module.exports = router;
