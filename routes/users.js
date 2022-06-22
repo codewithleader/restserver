@@ -5,7 +5,7 @@ const {
   validatePost,
   validatePut,
   validateDel,
-} = require('../middlewares/validators/middlewaresForValidations');
+} = require('../validators');
 
 const router = Router();
 

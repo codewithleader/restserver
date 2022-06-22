@@ -1,9 +1,11 @@
 const { check } = require('express-validator');
-const { isValidRole, isEmailExist, isUserByIdExist } = require('../../helpers/db-validator');
+const { isValidRole, isEmailExist, isUserByIdExist } = require('../helpers/db-validator');
 
-const { validateResult } = require('../../helpers/validateHelper');
-const { validateJWT } = require('../validate-jwt');
-const { isAdminRole, haveRole } = require('../validate-roles');
+// const { validateResult } = require('../../helpers/validateHelper');
+// const { validateJWT } = require('../validate-jwt');
+// const { isAdminRole, haveRole } = require('../validate-roles');
+
+const { validateResult, validateJWT, isAdminRole, haveRole } = require('../middlewares');
 
 // For validations middleware.
 
@@ -38,6 +40,6 @@ const validatePostAuth = [
   check('email', 'Email not found').exists().isEmail(),
   check('password', 'Password is required').exists().not().isEmpty(),
   validateResult,
-]
+];
 
 module.exports = { validatePost, validatePut, validateDel, validatePostAuth };
