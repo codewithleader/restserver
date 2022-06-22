@@ -26,17 +26,6 @@ const usersGET = async (req = request, res = response) => {
   // Pagination of users
   const { limit = 5, start = 0 } = req.query;
   const query = { state: true };
-  // const limitNum = limit => {
-  //   if (
-  //     Number(limit) === NaN ||
-  //     Number(limit) === undefined ||
-  //     Number(limit) === null ||
-  //     Number(limit) < 1
-  //   ) {
-  //     return 2;
-  //   }
-  //   return Number(limit);
-  // };
 
   const [total, users] = await Promise.all([
     User.countDocuments(query),

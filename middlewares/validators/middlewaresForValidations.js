@@ -1,6 +1,9 @@
 const { check } = require('express-validator');
 const { isValidRole, isEmailExist, isUserByIdExist } = require('../../helpers/db-validator');
+
 const { validateResult } = require('../../helpers/validateHelper');
+const { validateJWT } = require('../validate-jwt');
+const { isAdminRole, haveRole } = require('../validate-roles');
 
 // For validations middleware.
 
@@ -22,6 +25,9 @@ const validatePut = [
 ];
 
 const validateDel = [
+  validateJWT,
+  // isAdminRole,
+  haveRole('ADMIN_ROLE', 'SELLER_ROLE'),
   check('id', 'Not is valid id Elis').isMongoId(),
   check('id').custom(isUserByIdExist),
   validateResult,
