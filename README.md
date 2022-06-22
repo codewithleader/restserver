@@ -43,3 +43,12 @@ await mongoose.connect('mongodb://localhost:27017/test', {
   [More...](https://youtu.be/VMRgFfmv6j0)
 - [Official documentation](https://express-validator.github.io/docs/custom-error-messages.html)
 - [All validators](https://github.com/validatorjs/validator.js#validators)
+
+### Heroku commands:
+```
+heroku config:set ENVIRONMENT_VARIABLE_NAME="valueText123ABC"
+
+git push heroku main
+
+heroku logs -n 100 --tail
+```
