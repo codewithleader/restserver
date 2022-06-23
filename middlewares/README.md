@@ -3,7 +3,7 @@
 This code is more explicit:
 ```
 const { check } = require('express-validator');
-const { validateResult } = require('../../helpers/validateHelper');
+const { validateResult } = require('../../helpers/validateFields');
 
 const validateCreate = [
   check('name', 'Name is required').exists().not().isEmpty(),
@@ -21,7 +21,7 @@ module.exports = { validateCreate };
 but this is implicit:
 ```
 const { check } = require('express-validator');
-const { validateResult } = require('../../helpers/validateHelper');
+const { validateResult } = require('../../helpers/validateFields');
 
 const validateCreate = [
   check('name', 'Name is required').exists().not().isEmpty(),

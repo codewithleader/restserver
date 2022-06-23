@@ -1,10 +1,6 @@
 const { check } = require('express-validator');
 const { isValidRole, isEmailExist, isUserByIdExist } = require('../helpers/db-validator');
 
-// const { validateResult } = require('../../helpers/validateHelper');
-// const { validateJWT } = require('../validate-jwt');
-// const { isAdminRole, haveRole } = require('../validate-roles');
-
 const { validateResult, validateJWT, isAdminRole, haveRole } = require('../middlewares');
 
 // For validations middleware.
@@ -20,7 +16,7 @@ const validatePost = [
 ];
 
 const validatePut = [
-  check('id', 'Not is valid id Elis').isMongoId(),
+  check('id', 'Is Not a valid ID').isMongoId(),
   check('id').custom(isUserByIdExist),
   check('role').custom(isValidRole),
   validateResult,
@@ -30,14 +26,14 @@ const validateDel = [
   validateJWT,
   // isAdminRole,
   haveRole('ADMIN_ROLE', 'SELLER_ROLE'),
-  check('id', 'Not is valid id Elis').isMongoId(),
+  check('id', 'Is Not a valid ID').isMongoId(),
   check('id').custom(isUserByIdExist),
   validateResult,
 ];
 
 // FOR AUTHENTICATION MIDDLEWARE.
 const validatePostAuth = [
-  check('email', 'Email not found').exists().isEmail(),
+  check('email', 'Email is required').exists().isEmail(),
   check('password', 'Password is required').exists().not().isEmpty(),
   validateResult,
 ];
