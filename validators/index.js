@@ -38,4 +38,16 @@ const validatePostAuth = [
   validateResult,
 ];
 
-module.exports = { validatePost, validatePut, validateDel, validatePostAuth };
+// FOR AUTHENTICATION MIDDLEWARE.
+const validatePostAuthGoogle = [
+  check('id_token', 'id_token is required').exists().not().isEmpty(),
+  validateResult,
+];
+
+module.exports = {
+  validatePost,
+  validatePut,
+  validateDel,
+  validatePostAuth,
+  validatePostAuthGoogle,
+};

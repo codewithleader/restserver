@@ -52,3 +52,9 @@ git push heroku main
 
 heroku logs -n 100 --tail
 ```
+
+### Heroku link
+[https://web-rest-server-nodejs.herokuapp.com](https://web-rest-server-nodejs.herokuapp.com)
+
+### Google Sign In:
+[https://developers.google.com/identity/gsi/web/guides/overview](https://developers.google.com/identity/gsi/web/guides/overview)
