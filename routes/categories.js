@@ -1,34 +1,29 @@
 const { Router } = require('express');
 
-const { validatePostCreateCategory } = require('../validators');
-const { createCategory } = require('../controllers/categories');
+const { validateCreateCategory, validateGetCategory, validateUpdateCategory, validateDeleteCategory } = require('../validators');
+const {
+  createCategory,
+  getCategories,
+  getCategory,
+  updateCategory,
+  deleteCategory,
+} = require('../controllers/categories');
 
 const router = Router();
 
+// Create a category - Private. Anyone with a valid token can create a category
+router.post('/', validateCreateCategory, createCategory);
+
 // Get all categories - Public
-router.get('/', (req, res) => {
-  res.send('Get all categories');
-});
+router.get('/', getCategories);
 
 // Get a category - Public
-router.get('/:id', (req, res) => {
-  res.send('Get a category');
-});
-
-// Create a category - Private. Anyone with a valid token can create a category
-router.post('/', validatePostCreateCategory, createCategory);
+router.get('/:id', validateGetCategory, getCategory);
 
 // Update a category - Private. Anyone with a valid token can update a category
-router.put('/:id', (req, res) => {
-  res.send('Put: Update a category');
-});
+router.put('/:id', validateUpdateCategory, updateCategory);
 
 // Delete a category - Admin. Only the admin can disable a category.
-router.delete('/:id', (req, res) => {
-  res.send('Disable a category');
-});
-
-// router.get('/', validateGetCategories, getCategories);
-
+router.delete('/:id', validateDeleteCategory, deleteCategory);
 
 module.exports = router;

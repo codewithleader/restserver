@@ -1,6 +1,11 @@
 const { check } = require('express-validator');
-const { isValidRole, isEmailExist, isUserByIdExist } = require('../helpers/db-validator');
 
+const {
+  isValidRole,
+  isEmailExist,
+  isUserByIdExist,
+  isCategoryByIdExist,
+} = require('../helpers/db-validator');
 const { validateResult, validateJWT, isAdminRole, haveRole } = require('../middlewares');
 
 // For validations middleware.
@@ -45,9 +50,31 @@ const validatePostAuthGoogle = [
 ];
 
 // FOR CATEGORIES MIDDLEWARE.
-const validatePostCreateCategory = [
+const validateCreateCategory = [
   validateJWT,
   check('name', 'Name is required').exists().not().isEmpty(),
+  validateResult,
+];
+
+const validateGetCategory = [
+  check('id', 'Is Not a valid ID').isMongoId(),
+  check('id').custom(isCategoryByIdExist),
+  validateResult,
+];
+
+const validateUpdateCategory = [
+  validateJWT,
+  check('name', 'Name is required').exists().not().isEmpty(),
+  check('id', 'Is Not a valid ID').isMongoId(),
+  check('id').custom(isCategoryByIdExist),
+  validateResult,
+];
+
+const validateDeleteCategory = [
+  validateJWT,
+  isAdminRole,
+  check('id', 'Is Not a valid ID').isMongoId(),
+  check('id').custom(isCategoryByIdExist),
   validateResult,
 ];
 
@@ -57,5 +84,8 @@ module.exports = {
   validateDel,
   validatePostAuth,
   validatePostAuthGoogle,
-  validatePostCreateCategory,
+  validateCreateCategory,
+  validateGetCategory,
+  validateUpdateCategory,
+  validateDeleteCategory,
 };

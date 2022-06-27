@@ -1,5 +1,5 @@
 const Role = require('../models/role');
-const User = require('../models/user');
+const { User, Category } = require('../models');
 
 // For custom validations
 
@@ -29,4 +29,13 @@ const isUserByIdExist = async id => {
   }
 };
 
-module.exports = { isValidRole, isEmailExist, isUserByIdExist };
+// Validate category id exists
+const isCategoryByIdExist = async id => {
+  const categoryExist = await Category.findById(id);
+
+  if (!categoryExist) {
+    throw new Error(`Category with id: ${id}, doesn't exist in the database`);
+  }
+};
+
+module.exports = { isValidRole, isEmailExist, isUserByIdExist, isCategoryByIdExist };
