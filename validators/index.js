@@ -44,10 +44,18 @@ const validatePostAuthGoogle = [
   validateResult,
 ];
 
+// FOR CATEGORIES MIDDLEWARE.
+const validatePostCreateCategory = [
+  validateJWT,
+  check('name', 'Name is required').exists().not().isEmpty(),
+  validateResult,
+];
+
 module.exports = {
   validatePost,
   validatePut,
   validateDel,
   validatePostAuth,
   validatePostAuthGoogle,
+  validatePostCreateCategory,
 };

@@ -1,5 +1,8 @@
 const { Router } = require('express');
 
+const { validatePostCreateCategory } = require('../validators');
+const { createCategory } = require('../controllers/categories');
+
 const router = Router();
 
 // Get all categories - Public
@@ -13,9 +16,7 @@ router.get('/:id', (req, res) => {
 });
 
 // Create a category - Private. Anyone with a valid token can create a category
-router.post('/', (req, res) => {
-  res.send('Post a category');
-});
+router.post('/', validatePostCreateCategory, createCategory);
 
 // Update a category - Private. Anyone with a valid token can update a category
 router.put('/:id', (req, res) => {
