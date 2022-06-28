@@ -114,6 +114,14 @@ const validateDeleteProduct = [
   validateResult,
 ];
 
+// FOR SEARCH MIDDLEWARE.
+// const validateSearch = [
+//   check('collection', 'Collection is required').exists().not().isEmpty(),
+//   validateResult,
+//   check('term', 'Term is required').exists().not().isEmpty(),
+//   validateResult,
+// ]
+
 module.exports = {
   validatePost,
   validatePut,
@@ -129,4 +137,5 @@ module.exports = {
   validateGetProduct,
   validateUpdateProduct,
   validateDeleteProduct,
+  // validateSearch,
 };
