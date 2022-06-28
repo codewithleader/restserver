@@ -4,11 +4,14 @@ const { Product } = require('../models');
 const createProduct = async (req = request, res = response) => {
   const { state, user, ...body } = req.body;
 
-  const productDB = await Product.findOne({ name: body.name });
+  const nameUpper = body.name.toUpperCase();
+
+  const productDB = await Product.findOne({ name: nameUpper });
 
   if (productDB) {
     return res.status(400).json({
       msg: `The product ${productDB.name}, already exists`,
+      productDB,
     });
   }
 
@@ -57,6 +60,16 @@ const updateProduct = async (req = request, res = response) => {
   const { id } = req.params;
   const { state, user, ...data } = req.body;
 
+  // Validate if the product Name exists
+  const nameUpper = data.name.toUpperCase();
+  const productExist = await Product.findOne({ name: nameUpper });
+  if (productExist) {
+    return res.status(400).json({
+      msg: `There is another product with the Name: ${productExist.name}. Please, change the name of the product. Duplicate names are not allowed.`,
+      productExist,
+    });
+  }
+
   if (data.name) {
     data.name = data.name.toUpperCase();
   }
@@ -78,7 +91,7 @@ const deleteProduct = async (req = request, res = response) => {
 
   res.json({
     msg: 'Product deleted',
-    productDeleted
+    productDeleted,
   });
 };
 
@@ -88,4 +101,4 @@ module.exports = {
   getProduct,
   updateProduct,
   deleteProduct,
-}
+};
