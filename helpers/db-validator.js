@@ -1,5 +1,5 @@
 const Role = require('../models/role');
-const { User, Category } = require('../models');
+const { User, Category, Product } = require('../models');
 
 // For custom validations
 
@@ -38,4 +38,18 @@ const isCategoryByIdExist = async id => {
   }
 };
 
-module.exports = { isValidRole, isEmailExist, isUserByIdExist, isCategoryByIdExist };
+// Validate product id exists
+const isProductByIdExist = async id => {
+  const productExist = await Product.findById(id);
+  if (!productExist) {
+    throw new Error(`Product with id: ${id} doesn't exist in the database`);
+  }
+};
+
+module.exports = {
+  isValidRole,
+  isEmailExist,
+  isUserByIdExist,
+  isCategoryByIdExist,
+  isProductByIdExist,
+};

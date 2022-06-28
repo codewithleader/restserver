@@ -5,6 +5,7 @@ const {
   isEmailExist,
   isUserByIdExist,
   isCategoryByIdExist,
+  isProductByIdExist,
 } = require('../helpers/db-validator');
 const { validateResult, validateJWT, isAdminRole, haveRole } = require('../middlewares');
 
@@ -74,7 +75,42 @@ const validateDeleteCategory = [
   validateJWT,
   isAdminRole,
   check('id', 'Is Not a valid ID').isMongoId(),
+  validateResult,
   check('id').custom(isCategoryByIdExist),
+  validateResult,
+];
+
+// FOR PRODUCTS MIDDLEWARE.
+const validateCreateProduct = [
+  validateJWT,
+  check('name', 'Name is required').not().isEmpty(),
+  check('category', 'Category require a valid MongoID').isMongoId(),
+  check('category').custom(isCategoryByIdExist),
+  validateResult,
+];
+
+// Validate Get Products haven't any validations yet.
+// const validateGetProducts = [];
+
+const validateGetProduct = [
+  check('id', 'Is Not a valid MongoID').isMongoId(),
+  check('id').custom(isProductByIdExist),
+  validateResult,
+];
+
+const validateUpdateProduct = [
+  validateJWT,
+  check('id', 'Id is required').exists().not().isEmpty(),
+  check('name', 'Name is required').exists().not().isEmpty(),
+  check('id').custom(isProductByIdExist),
+  validateResult,
+];
+
+const validateDeleteProduct = [
+  validateJWT,
+  isAdminRole,
+  check('id', 'Is Not a valid MongoId').isMongoId(),
+  check('id').custom(isProductByIdExist),
   validateResult,
 ];
 
@@ -88,4 +124,9 @@ module.exports = {
   validateGetCategory,
   validateUpdateCategory,
   validateDeleteCategory,
+  validateCreateProduct,
+  // validateGetProducts,
+  validateGetProduct,
+  validateUpdateProduct,
+  validateDeleteProduct,
 };
