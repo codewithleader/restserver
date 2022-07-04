@@ -51,3 +51,18 @@ router.get('/auth/login', validatorGet, login);
 - const { q, name, password, id } = req.query;
 OR...
 - const { ...queries } = req.query;
+
+
+
+## Upload Files.
+- Install express-fileupload
+
+```
+// Note that this option available for versions 1.0.0 and newer.
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
+```
+
+[https://www.npmjs.com/package/express-fileupload#using-usetempfile-options](https://www.npmjs.com/package/express-fileupload#using-usetempfile-options)

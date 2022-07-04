@@ -1,22 +1,24 @@
 const { Router } = require('express');
 
-const { usersGET, usersPOST, usersPUT, usersDELETE, usersPATCH } = require('../controllers/users');
 const {
-  validatePost,
-  validatePut,
-  validateDel,
-} = require('../validators');
+  createUser,
+  getUsers,
+  updateUser,
+  modifyUser,
+  deleteUser,
+} = require('../controllers/users');
+const { validateCreateUser, validateUpdateUser, validateDeleteUser } = require('../validators');
 
 const router = Router();
 
-router.post('/', validatePost, usersPOST);
+router.post('/', validateCreateUser, createUser);
 
-router.get('/', usersGET);
+router.get('/', getUsers);
 
-router.put('/:id', validatePut, usersPUT);
+router.put('/:id', validateUpdateUser, updateUser);
 
-router.patch('/', usersPATCH);
+router.patch('/', modifyUser);
 
-router.delete('/:id', validateDel, usersDELETE);
+router.delete('/:id', validateDeleteUser, deleteUser);
 
 module.exports = router;

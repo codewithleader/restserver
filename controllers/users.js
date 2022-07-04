@@ -5,7 +5,7 @@ const User = require('../models/user');
 
 // ? ::CRUD:: Create, Read, Update, Delete.
 // POST: Create
-const usersPOST = async (req = request, res = response) => {
+const createUser = async (req = request, res = response) => {
   const { name, email, password, role } = req.body;
   const user = new User({ name, email, password, role });
 
@@ -22,7 +22,7 @@ const usersPOST = async (req = request, res = response) => {
 };
 
 // GET: Read
-const usersGET = async (req = request, res = response) => {
+const getUsers = async (req = request, res = response) => {
   // Pagination of users
   const { limit = 5, start = 0 } = req.query;
   const query = { state: true };
@@ -41,7 +41,7 @@ const usersGET = async (req = request, res = response) => {
 };
 
 // PUT: Update/Replace
-const usersPUT = async (req = request, res = response) => {
+const updateUser = async (req = request, res = response) => {
   const { id } = req.params;
   const { _id, password, google, email, ...rest } = req.body;
 
@@ -58,14 +58,14 @@ const usersPUT = async (req = request, res = response) => {
 };
 
 // PATCH: Update/Modify
-const usersPATCH = (req = request, res = response) => {
+const modifyUser = (req = request, res = response) => {
   res.json({
     msg: 'patch API - Controller',
   });
 };
 
 // ! DEL: Delete
-const usersDELETE = async (req = request, res = response) => {
+const deleteUser = async (req = request, res = response) => {
   const { id } = req.params;
   // const user = await User.findByIdAndDelete(id);
   const user = await User.findByIdAndUpdate(id, { state: false }, { new: true });
@@ -73,9 +73,9 @@ const usersDELETE = async (req = request, res = response) => {
 };
 
 module.exports = {
-  usersGET,
-  usersPOST,
-  usersPUT,
-  usersDELETE,
-  usersPATCH,
+  createUser,
+  getUsers,
+  updateUser,
+  modifyUser,
+  deleteUser,
 };

@@ -1,6 +1,11 @@
 const { Router } = require('express');
 
-const { validateCreateCategory, validateGetCategory, validateUpdateCategory, validateDeleteCategory } = require('../validators');
+const {
+  validateCreateCategory,
+  validateGetCategory,
+  validateUpdateCategory,
+  validateDeleteCategory,
+} = require('../validators');
 const {
   createCategory,
   getCategories,
