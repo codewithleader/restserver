@@ -1,5 +1,4 @@
-const Role = require('../models/role');
-const { User, Category, Product } = require('../models');
+const { User, Category, Product, Role } = require('../models');
 
 // For custom validations
 

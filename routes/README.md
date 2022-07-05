@@ -66,3 +66,10 @@ app.use(fileUpload({
 ```
 
 [https://www.npmjs.com/package/express-fileupload#using-usetempfile-options](https://www.npmjs.com/package/express-fileupload#using-usetempfile-options)
+
+
+# Request
+- rawHeaders []
+- params {}
+- query {}
+- files {}

@@ -1,6 +1,6 @@
 const { request, response } = require('express');
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+const { User } = require('../models');
 require('dotenv').config();
 
 const validateJWT = async (req = request, res = response, next) => {

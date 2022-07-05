@@ -10,18 +10,18 @@ const helperUploadFile = (files, validExtensions = ['png', 'jpg', 'jpeg'], folde
     // Validate the extension
     if (!validExtensions.includes(extension)) {
       return reject(
-        `The extension ${extension} is not allowed - Valid extensions: ${validExtensions}`
+        `The extension .${extension} is not allowed - Valid extensions: ${validExtensions.join(', ')}`
       );
     }
 
-    const nameTemp = uuidv4() + '.' + extension;
-    const uploadPath = path.join(__dirname, '../uploads/', folder, nameTemp);
+    const newFileName = uuidv4() + '.' + extension; // j3kl-1s34-e12j.jpg
+    const uploadPath = path.join(__dirname, '../uploads/', folder, newFileName);
 
     file.mv(uploadPath, err => {
       if (err) {
         reject(err);
       }
-      resolve(nameTemp);
+      resolve(newFileName);
     });
   });
 };

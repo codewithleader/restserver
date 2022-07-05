@@ -14,7 +14,7 @@ const uploadFile = async (req = request, res = response) => {
     const name = await helperUploadFile(req.files, undefined, 'pictures');
     res.json({ name });
   } catch (msg) {
-    res.status(400).json({ msg, msg2: 'Elis: If the folder does not exist then you must create it. Example: upload/pictures/name.jpg.', from: 'controllers/uploads.js' });
+    res.status(400).json({ msg, from: 'controllers/uploads.js' });
   }
 };
 

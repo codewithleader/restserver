@@ -1,12 +1,12 @@
 const { Router } = require('express');
 
 const { login, googleSignIn } = require('../controllers/auth');
-const { validatePostAuth, validatePostAuthGoogle } = require('../validators');
+const { validateLogin, validateGoogleSignIn } = require('../validators');
 
 const router = Router();
 
-router.post('/login', validatePostAuth, login);
+router.post('/login', validateLogin, login);
 
-router.post('/google', validatePostAuthGoogle, googleSignIn);
+router.post('/google', validateGoogleSignIn, googleSignIn);
 
 module.exports = router;

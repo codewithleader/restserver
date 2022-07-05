@@ -43,11 +43,12 @@ class Server {
     // Public directory
     this.app.use(express.static('public'));
 
-    // File Upload
+    // FileUpload
     this.app.use(
       fileUpload({
         useTempFiles: true,
-        tempFileDir: './tmp',
+        tempFileDir: '/tmp/',
+        createParentPath: true, // Create the upload directory if it doesn't exist
       })
     );
   }
