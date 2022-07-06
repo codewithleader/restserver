@@ -46,6 +46,13 @@ const isProductByIdExist = async id => {
 };
 
 
+/**
+ * If the collection is not included in the collections array, throw an error.
+ * @param [collection] - The collection you want to check.
+ * @param [collections] - The collections that are allowed to be queried.
+ * @returns A function that takes a collection and a list of collections and returns true if the
+ * collection is in the list of collections.
+ */
 const allowedCollections = (collection = '', collections = []) => {
   const isInclude = collections.includes(collection);
   if (!isInclude) {

@@ -1,7 +1,7 @@
 const { check } = require('express-validator');
 
 const { isValidRole, isEmailExist, isUserByIdExist } = require('../helpers/db-validator');
-const { validateResult, validateJWT, haveRole } = require('../middlewares');
+const { validateResult, validateJWT, haveRole, isAdminRole } = require('../middlewares');
 
 // USER VALIDATORS.
 
@@ -15,10 +15,22 @@ const validateCreateUser = [
   validateResult,
 ];
 
+const validateGetUsers = [
+  validateJWT,
+  isAdminRole,
+  validateResult,
+];
+
 const validateUpdateUser = [
   check('id', 'Is Not a valid ID').isMongoId(),
   check('id').custom(isUserByIdExist),
   check('role').custom(isValidRole),
+  validateResult,
+];
+
+const validateModifyUsers = [
+  validateJWT,
+  isAdminRole,
   validateResult,
 ];
 
@@ -33,6 +45,8 @@ const validateDeleteUser = [
 
 module.exports = {
   validateCreateUser,
+  validateGetUsers,
   validateUpdateUser,
+  validateModifyUsers,
   validateDeleteUser,
 };

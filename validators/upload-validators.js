@@ -1,7 +1,9 @@
 const { check } = require('express-validator');
+const jwt = require('jsonwebtoken');
 
 const { allowedCollections } = require('../helpers/db-validator');
 const { validateResult, uploadFileValidator, validateJWT, isAdminRole } = require('../middlewares');
+const user = require('../models/user');
 
 
 const validateUploadFile = [
@@ -11,7 +13,23 @@ const validateUploadFile = [
   validateResult,
 ]
 
+const validateIDvsToken = async (req, res, next) => {
+  const { id } = req.params;
+  const { uid } = jwt.verify(req.header('x-token'), process.env.SECRET_OR_PRIVATE_KEY);
+
+  console.log('req.user.uid:', uid);
+  console.log('Param ID:', id);
+  if (id !== uid) {
+    return res.status(401).json({
+      msg: 'You are trying to change another user photo. You can only update your profile picture. Invalid token',
+    });
+  }
+  next();
+}
+
 const validateUpdatePicture = [
+  validateJWT,
+  validateIDvsToken,
   uploadFileValidator,
   check('id', 'Is Not a valid MongoID').isMongoId(),
   check('collection').custom(c => allowedCollections(c, ['users', 'products'])),

@@ -1,5 +1,5 @@
 const { request, response } = require('express');
-const { path } = require('path');
+const path = require('path');
 const fs = require('fs');
 
 const cloudinary = require('cloudinary').v2;
@@ -14,7 +14,7 @@ const uploadFile = async (req = request, res = response) => {
     const name = await helperUploadFile(req.files, undefined, 'pictures');
     res.json({ name });
   } catch (msg) {
-    res.status(400).json({ msg, from: 'controllers/uploads.js' });
+    res.status(400).json({ msg, from: 'controllers/uploads.js ~ uploadFile' });
   }
 };
 

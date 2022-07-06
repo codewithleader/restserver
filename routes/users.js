@@ -7,17 +7,17 @@ const {
   modifyUser,
   deleteUser,
 } = require('../controllers/users');
-const { validateCreateUser, validateUpdateUser, validateDeleteUser } = require('../validators');
+const { validateCreateUser, validateUpdateUser, validateDeleteUser, validateGetUsers, validateModifyUsers } = require('../validators');
 
 const router = Router();
 
 router.post('/', validateCreateUser, createUser);
 
-router.get('/', getUsers);
+router.get('/', validateGetUsers, getUsers);
 
 router.put('/:id', validateUpdateUser, updateUser);
 
-router.patch('/', modifyUser);
+router.patch('/', validateModifyUsers, modifyUser);
 
 router.delete('/:id', validateDeleteUser, deleteUser);
 

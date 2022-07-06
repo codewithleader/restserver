@@ -24,13 +24,13 @@ const createUser = async (req = request, res = response) => {
 // GET: Read
 const getUsers = async (req = request, res = response) => {
   // Pagination of users
-  const { limit = 5, start = 0 } = req.query;
+  const { limit = 5, skip = 0 } = req.query;
   const query = { state: true };
   // const query = { state: true, role: 'ADMIN_ROLE' };
 
   const [total, users] = await Promise.all([
     User.countDocuments(query),
-    User.find(query).skip(Number(start)).limit(Number(limit)),
+    User.find(query).skip(Number(skip)).limit(Number(limit)),
   ]);
 
   res.json({
