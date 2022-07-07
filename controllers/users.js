@@ -61,7 +61,7 @@ const updateUser = async (req = request, res = response) => {
 // PATCH: Update/Modify
 const modifyUser = (req = request, res = response) => {
   res.json({
-    msg: 'patch API - Controller',
+    msg: 'This is an example of PATCH request ~ controller/users.js',
   });
 };
 

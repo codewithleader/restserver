@@ -45,8 +45,9 @@ await mongoose.connect('mongodb://localhost:27017/test', {
 - [All validators](https://github.com/validatorjs/validator.js#validators)
 
 ### Heroku commands:
+[heroku config](https://devcenter.heroku.com/articles/heroku-cli-commands#heroku-config)
 ```
-heroku config:set ENVIRONMENT_VARIABLE_NAME="valueText123ABC"
+heroku config:set ENVIRONMENT_VARIABLE_NAME=valueText123ABC
 
 git push heroku main
 

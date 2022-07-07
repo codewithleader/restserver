@@ -175,10 +175,10 @@ const getPictureCloudinary = async (req = request, res = response) => {
         });
       }
 
-    default:
-      return res.status(500).json({
-        msg: `There is no validation for these case yet, please contact the developer`,
-      });
+    // default:
+    //   return res.status(500).json({
+    //     msg: `There is no validation for these case yet, please contact the developer`,
+    //   });
   }
 
 
