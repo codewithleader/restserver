@@ -4,6 +4,7 @@
   "description": "REST-Server with Node JS",
   "main": "app.js",
   "scripts": {
+    "dev": "nodemon app.js",
     "start": "node app.js"
   },
   "author": "Elis Antonio Perez <elisperezmusic@gmail.com> (https://www.instagram.com/elisperezmusic)",
