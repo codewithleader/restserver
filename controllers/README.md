@@ -1,8 +1,12 @@
 # Regular expression
 - Comes natively in Javascript for string searching. So we can use the RegExp constructor to create a regular expression. No need to import RegExp module
 
+# ¿Para que se usa la expresion regular?
+- En el ejemplo siguiente queremos encontrar uno o más registros que coincidan con el termino de busqueda. Si el registro tiene un email: elsa@pato.com y el termino de busqueda es "elsa" entonces traerá ese resultado. Es como hacer un tipo %LIKE% en SQL.
+
 Example:
 ```
+  const term = 'elsa'
   const regex = new RegExp(term, 'i');
 ```
 With mongoose:
@@ -12,6 +16,9 @@ With mongoose:
     $and: [{ state: true }],
   });
 ```
+
+- El $or: es para buscar en distintos campos.
+- El $and: es para que el registro tenga que cumplir la condición de que el campo state sea "true". Si coincide el termino de busqueda en el campo name o email pero el state esta en "false" entonces no traerá ese registro.
 
 ## Cloudinary
 
